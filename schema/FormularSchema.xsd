@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xs:schema xmlns="DataImport" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="DataImport">
+<xs:include schemaLocation="CommonTypes.xsd"/>
+<xs:include schemaLocation="GrundOchMarginal.xsd"/>
+<xs:include schemaLocation="AldersInverkan.xsd"/>
+	<xs:element name="Formular">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="metaDataType">
+					<xs:choice>
+						<xs:element name="GrundOchMarginal" type="GrundOchMarginalType"/>
+						<xs:element name="AldersInverkan" type="AldersInverkanType"/>
+					</xs:choice>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

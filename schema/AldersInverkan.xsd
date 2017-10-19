@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xs:schema xmlns="DataImport" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="DataImport">
+	<xs:include schemaLocation="CommonTypes.xsd" />
+
+	<xs:complexType name="AldersInverkanType">
+		<xs:sequence>
+			<xs:element ref="fastighetsTaxeringsAr" minOccurs="1" maxOccurs="1"/>
+			<xs:element ref="aldersInverkan" minOccurs="1" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xs:schema xmlns="DataImport" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	elementFormDefault="qualified" targetNamespace="DataImport">
+
+	<xs:simpleType name="fastighetsTaxeringsArType">
+		<xs:restriction base="xs:gYear">
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="fastighetsTaxeringsAr" type="fastighetsTaxeringsArType" />
+
+	<xs:complexType name="metaDataType">
+		<xs:sequence>
+			<xs:element name="AnkomstDatum" type="xs:date" />
+			<xs:element name="TidsStampel" type="xs:time" />
+			<xs:element name="TotalLaddning" type="xs:boolean" />
+			<xs:element name="FilTyp">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="GRUNDOCHMARGINAL" />
+						<xs:enumeration value="ALDERSINVERKAN" />
+						<!-- -->
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<!-- NivaFaktor -->
+	<xs:complexType name="nivaFaktorType">
+		<xs:sequence>
+			<xs:element name="undreGrans">
+				<xs:simpleType>
+					<xs:restriction base="xs:decimal">
+						<xs:minInclusive value="1.1" />
+						<xs:maxInclusive value="99.9" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="ovreGrans">
+				<xs:simpleType>
+					<xs:restriction base="xs:decimal">
+						<xs:minInclusive value="1.1" />
+						<xs:maxInclusive value="99.9" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element ref="standardPoang" maxOccurs="unbounded"
+				minOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="nivaFaktor" type="nivaFaktorType" />
+
+	<!-- StandardPoang -->
+	<xs:complexType name="standardPoangType">
+		<xs:sequence>
+			<xs:element name="undreGrans">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="0" />
+						<xs:maxInclusive value="65" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="ovreGrans">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="1" />
+						<xs:maxInclusive value="68" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element ref="vardeYta" minOccurs="1" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="standardPoang" type="standardPoangType" />
+
+	<!-- VardeYta -->
+	<xs:complexType name="vardeYtaType">
+		<xs:sequence>
+			<xs:element name="undreGrans">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="0" />
+						<xs:maxInclusive value="251" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="ovreGrans">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="75" />
+						<xs:maxInclusive value="9999" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element ref="varde" minOccurs="1" maxOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="vardeYta" type="vardeYtaType" />
+
+
+	<!-- Varde -->
+	<xs:complexType name="vardeType">
+		<xs:sequence>
+			<xs:element name="grundVarde">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="1000" />
+						<xs:maxInclusive value="999999" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="marginalVarde">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="0" />
+						<xs:maxInclusive value="9999" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="varde" type="vardeType" />
+
+	<!-- AldersInverkan -->
+	<xs:complexType name="aldersInverkanType">
+		<xs:sequence>
+			<xs:element name="Procent">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:enumeration value="65" />
+						<xs:enumeration value="75" />
+						<xs:enumeration value="80" />
+						<xs:enumeration value="85" />
+						<xs:enumeration value="90" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element ref="vardeAr" minOccurs="1" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="aldersInverkan" type="aldersInverkanType"/>
+	
+	<!-- VardeAr -->
+	<xs:complexType name="vardeArType">
+		<xs:sequence>
+			<xs:element name="Undregrans">
+				<xs:simpleType>
+					<xs:restriction base="xs:gYear">
+						<xs:minInclusive value="1929" />
+						<xs:maxInclusive value="9999" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="Ovregrans">
+				<xs:simpleType>
+					<xs:restriction base="xs:gYear">
+						<xs:minInclusive value="1939" />
+						<xs:maxInclusive value="9999" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element ref="StandardPoang" minOccurs="1" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="vardeAr" type="vardeArType"/>
+
+	<!-- StandardPoang -->
+	<xs:complexType name="StandardPoangType">
+		<xs:sequence>
+			<xs:element name="Undregrans">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="0" />
+						<xs:maxInclusive value="56" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="Ovregrans">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:minInclusive value="8" />
+						<xs:maxInclusive value="99" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element ref="reduktionsFaktor" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="StandardPoang" type="StandardPoangType"/>
+
+	<!-- ReduktionsFaktor -->
+	<xs:complexType name="reduktionsFaktorType">
+		<xs:sequence>
+			<xs:element name="Faktor">
+				<xs:simpleType>
+					<xs:restriction base="xs:decimal">
+						<xs:minInclusive value="0.01" />
+						<xs:maxInclusive value="9.99" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="reduktionsFaktor" type="reduktionsFaktorType"/>
+
+</xs:schema>
